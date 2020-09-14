@@ -1,0 +1,24 @@
+﻿@model WebApplication1.Models.VoMainScriptModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var entities = Model.VoMainScriptEntities.Entities;
+}
+
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    @*foreach (var item in entities)
+    {
+
+        <span> | @item.Attributes["new_name"]: </span> @Html.CheckBox(@item.Id.ToString(), false) <br />
+
+    }*@
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+}
+
