@@ -19,10 +19,9 @@
     for (int i = 0; i < Model.BooksViews.Count; i++)
     {
         <p>
-            @Model.BooksViews[i].Name
-            @Model.BooksViews[i].IsCheck
+            @Model.BooksViews[i].ViewName.Name
             @Html.CheckBoxFor(x => Model.BooksViews[i].IsCheck)
-            @Html.HiddenFor(x=>Model.BooksViews[i].Name)
+            @Html.HiddenFor(x=>Model.BooksViews[i].ViewName.Name)
         </p>
     }
 

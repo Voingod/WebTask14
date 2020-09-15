@@ -5,22 +5,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    for (int i = 0; i < Model.voMainScriptChecked.Count; i++)
-    {
-        <p>
-            @Model.voMainScriptChecked[i].VoMainScriptEntity.Attributes["new_name"]
-            @Html.CheckBoxFor(x => Model.voMainScriptChecked[i].IsChecked)
-            @Html.HiddenFor(x => Model.voMainScriptChecked[i].VoMainScriptEntity)
-        </p>
-    }
+    <table class="table">
+        <tr>
+            <th>@ViewBag.StatusStart</th>
+        </tr>
 
-    <input type="file" id="myFile" name="myFileName">
+        @for (int i = 0; i < Model.voMainScriptChecked.Count; i++)
+        {
+            <tr>
+                <td>
+                    @Model.voMainScriptChecked[i].VoMainScriptEntity.Attributes[ViewBag.RecordName]
+                    @Html.CheckBoxFor(x => Model.voMainScriptChecked[i].IsChecked)
+                    @Html.HiddenFor(x => Model.voMainScriptChecked[i].VoMainScriptEntity.Id)
+                    @Html.HiddenFor(x => Model.voMainScriptChecked[i].VoMainScriptEntity.LogicalName)
+                </td>
+            </tr>
+        }
+
+    </table>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="file" id="myFile" name="myFileName">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Attach" class="btn btn-default" />
         </div>
     </div>
 }

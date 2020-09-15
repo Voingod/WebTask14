@@ -24,10 +24,12 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public string Index(BookM model, HttpPostedFileBase myFileName)
         {
-            var flen = myFileName.ContentLength;
-            byte[] arr = new byte[flen];
-            myFileName.InputStream.Read(arr, 0, flen);
-            var ss = Convert.ToBase64String(arr);
+
+            var mmmm = model.BooksViews[0].ViewName;
+            //var flen = myFileName.ContentLength;
+            //byte[] arr = new byte[flen];
+            //myFileName.InputStream.Read(arr, 0, flen);
+            //var ss = Convert.ToBase64String(arr);
 
             //var b = books.GetBook();
             return "Good";

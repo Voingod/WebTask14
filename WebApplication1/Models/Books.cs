@@ -7,15 +7,16 @@ namespace WebApplication1.Models
 {
     public class Books
     {
-        private List<string> GetBooks()
+        private List<BookOne> GetBooks()
         {
-            List<string> books = new List<string>()
+            List<BookOne> books = new List<BookOne>()
             {
-                "one","two","three"
+                new BookOne{Name="one"},
+                new BookOne{Name="two"},
+                new BookOne{Name="three"}
             };
             return books;
         }
-
         public List<BooksView> GetCheckedBooks()
         {
             List<BooksView> Allbooks = new List<BooksView>();
@@ -23,11 +24,26 @@ namespace WebApplication1.Models
             {
                 BooksView booksView = new BooksView
                 {
-                    Name = item
+                    ViewName = item
                 };
                 Allbooks.Add(booksView);
             }
             return Allbooks;
         }
+
+    }
+    public class BooksView
+    {
+        public BookOne ViewName { get; set; }
+        public bool IsCheck { get; set; }
+    }
+    public class BookM
+    {
+        public List<BooksView> BooksViews { get; set; }
+    }
+
+    public class BookOne
+    {
+        public string Name{ get;set;}
     }
 }

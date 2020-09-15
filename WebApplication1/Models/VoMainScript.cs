@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 
@@ -10,7 +11,8 @@ namespace WebApplication1.Models
     public class VoMainScripts
     {
         private IOrganizationService _service;
-        private const string EntityName = "new_vo_main_script";
+        private string entityName = ConfigurationManager.AppSettings.Get("EntitylName");
+        private string recordName = ConfigurationManager.AppSettings.Get("RecordName");
         public VoMainScripts(IOrganizationService service)
         {
             _service = service;
@@ -18,9 +20,9 @@ namespace WebApplication1.Models
 
         private EntityCollection GetVoMainScriptRecors()
         {
-            QueryExpression qe = new QueryExpression(EntityName)
+            QueryExpression qe = new QueryExpression(entityName)
             {
-                ColumnSet = new ColumnSet("new_name"),
+                ColumnSet = new ColumnSet(recordName),
 
             };
             EntityCollection records = _service.RetrieveMultiple(qe);
@@ -45,7 +47,6 @@ namespace WebApplication1.Models
             return recordsCheck;
         }
     }
-
     public class VoMainScriptChecked
     {
         public Entity VoMainScriptEntity { get; set; }
@@ -53,6 +54,6 @@ namespace WebApplication1.Models
     }
     public class VoMainScriptModel
     {
-        public List<VoMainScriptChecked> voMainScriptChecked = new List<VoMainScriptChecked>();
+        public List<VoMainScriptChecked> voMainScriptChecked { get; set; }
     }
 }
