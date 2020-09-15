@@ -3,18 +3,21 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var entities = Model.VoMainScriptEntities.Entities;
 }
 
 
-@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @*foreach (var item in entities)
+    for (int i = 0; i < Model.voMainScriptChecked.Count; i++)
     {
+        <p>
+            @Model.voMainScriptChecked[i].VoMainScriptEntity.Attributes["new_name"]
+            @Html.CheckBoxFor(x => Model.voMainScriptChecked[i].IsChecked)
+            @Html.HiddenFor(x => Model.voMainScriptChecked[i].VoMainScriptEntity)
+        </p>
+    }
 
-        <span> | @item.Attributes["new_name"]: </span> @Html.CheckBox(@item.Id.ToString(), false) <br />
-
-    }*@
+    <input type="file" id="myFile" name="myFileName">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Create" class="btn btn-default" />

@@ -23,19 +23,17 @@ namespace WebApplication1.Controllers
             OrganizationServiceProxy serviceProxy = ConnectHelper.CrmService;
             var service = (IOrganizationService)serviceProxy;
 
-            VoMainScript voMain = new VoMainScript(service);
-            VoMainScriptModel voMainModel = new VoMainScriptModel
-            {
-                VoMainScriptEntities = voMain.GetVoMainScriptRecors()
-            };
+            VoMainScripts voMainScripts = new VoMainScripts(service);
+            VoMainScriptModel voMainScriptModel = new VoMainScriptModel();
 
-            return View(voMainModel);
+            voMainScriptModel.voMainScriptChecked = voMainScripts.GetCheckedVoMainScripts();
+
+            return View(voMainScriptModel);
         }
         [HttpPost]
-        public ActionResult Index(DataCollection<Entity> entities)
+        public string Index(VoMainScriptModel voMainScriptModel, HttpFileCollectionBase myFileName)
         {
-            var qwe = 123;
-            return View();
+            return "good";
         }
 
     }

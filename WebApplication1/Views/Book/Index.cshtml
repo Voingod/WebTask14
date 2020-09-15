@@ -1,9 +1,9 @@
-﻿@model WebApplication1.Models.BookModel
+﻿@model WebApplication1.Models.BookM
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var books = Model.books;
+    //var wer = .;
 }
 
 <h2>Index</h2>
@@ -12,24 +12,21 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-@using (Html.BeginForm("Index", "Book", FormMethod.Post))
+@using (Html.BeginForm("Index","Book", FormMethod.Post,  new { enctype = "multipart/form-data" }))
 {
 
 
-
-
-    foreach (var item in books)
+    for (int i = 0; i < Model.BooksViews.Count; i++)
     {
-<p>
-    @item
-    <input id="Ischeck" name="Ischeck" type="checkbox" value="true">
-    @*@Html.CheckBox("Ischeck")*@
-</p>
-
+        <p>
+            @Model.BooksViews[i].Name
+            @Model.BooksViews[i].IsCheck
+            @Html.CheckBoxFor(x => Model.BooksViews[i].IsCheck)
+            @Html.HiddenFor(x=>Model.BooksViews[i].Name)
+        </p>
     }
 
-
-
+<input type="file" id="myFile" name="myFileName">
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Create" class="btn btn-default" />

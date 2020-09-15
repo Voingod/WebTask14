@@ -7,16 +7,16 @@ using System.Web;
 
 namespace WebApplication1.Models
 {
-    public class VoMainScript
+    public class VoMainScripts
     {
         private IOrganizationService _service;
         private const string EntityName = "new_vo_main_script";
-        public VoMainScript(IOrganizationService service)
+        public VoMainScripts(IOrganizationService service)
         {
             _service = service;
         }
 
-        public EntityCollection GetVoMainScriptRecors()
+        private EntityCollection GetVoMainScriptRecors()
         {
             QueryExpression qe = new QueryExpression(EntityName)
             {
@@ -30,5 +30,29 @@ namespace WebApplication1.Models
             }
             return null;
         }
+
+        public List<VoMainScriptChecked> GetCheckedVoMainScripts()
+        {
+            List<VoMainScriptChecked> recordsCheck = new List<VoMainScriptChecked>();
+            foreach (var item in GetVoMainScriptRecors().Entities)
+            {
+                VoMainScriptChecked voMainScriptChecked = new VoMainScriptChecked
+                {
+                    VoMainScriptEntity = item
+                };
+                recordsCheck.Add(voMainScriptChecked);
+            }
+            return recordsCheck;
+        }
+    }
+
+    public class VoMainScriptChecked
+    {
+        public Entity VoMainScriptEntity { get; set; }
+        public bool IsChecked { get; set; }
+    }
+    public class VoMainScriptModel
+    {
+        public List<VoMainScriptChecked> voMainScriptChecked = new List<VoMainScriptChecked>();
     }
 }

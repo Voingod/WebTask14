@@ -15,18 +15,21 @@ namespace WebApplication1.Controllers
         public ActionResult Index()
         {
             Books books = new Books();
-            BookModel bookModel = new BookModel();
-            bookModel.books = books.GetBook();
+            BookM bookM = new BookM();
 
-            BooksView booksView = new BooksView();
-            booksView.BookModels.books = books.GetBook();
+            bookM.BooksViews = books.GetCheckedBooks();
 
-            return View(bookModel);
+            return View(bookM);
         }
         [HttpPost]
-        public string Index(Books books, object Ischeck)
+        public string Index(BookM model, HttpPostedFileBase myFileName)
         {
-            var b = books.GetBook();
+            var flen = myFileName.ContentLength;
+            byte[] arr = new byte[flen];
+            myFileName.InputStream.Read(arr, 0, flen);
+            var ss = Convert.ToBase64String(arr);
+
+            //var b = books.GetBook();
             return "Good";
         }
 
